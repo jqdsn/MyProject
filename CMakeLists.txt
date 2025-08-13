@@ -9,15 +9,17 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(OpenCV REQUIRED)
 find_package(Qt6 COMPONENTS Core Widgets Network REQUIRED)
-find_package(GTest REQUIRED) 
+include(FetchContent)
 
-if (NOT GTEST_INCLUDE_DIRS)
-    set(GTEST_INCLUDE_DIRS "$ENV{GTEST_INCLUDE_DIR}")
-endif()
+# 下载并构建 googletest
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+)
+# 避免 MSVC CRT 冲突
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-if (NOT GTEST_LIBRARIES)
-    set(GTEST_LIBRARIES "$ENV{GTEST_LIBRARY}" "$ENV{GTEST_MAIN_LIBRARY}")
-endif()
+FetchContent_MakeAvailable(googletest)
 
 include_directories(${GTEST_INCLUDE_DIRS})
 
