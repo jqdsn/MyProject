@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1300</width><height>760</height></rect>
+  </property>
+  <property name="windowTitle"><string>Metrology GUI - Interactive ROI</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="h">
+    <item>
+     <widget class="QWidget" name="panel" >
+      <layout class="QVBoxLayout" name="vpanel">
+
+       <item>
+        <widget class="QGroupBox" name="groupCalib">
+         <property name="title"><string>Calibration</string></property>
+         <layout class="QFormLayout" name="formCalib">
+          <item row="0" column="0"><widget class="QLabel"><property name="text"><string>mm/px</string></property></widget></item>
+          <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinScale"><property name="decimals"><number>6</number></property><property name="value"><double>0.02</double></property><property name="maximum"><double>10.0</double></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QGroupBox" name="groupRoiTool">
+         <property name="title"><string>ROI Tool</string></property>
+         <layout class="QGridLayout" name="gridRoi">
+          <item row="0" column="0"><widget class="QPushButton" name="btnRect"><property name="text"><string>Rect</string></property></widget></item>
+          <item row="0" column="1"><widget class="QPushButton" name="btnRing"><property name="text"><string>Ring</string></property></widget></item>
+          <item row="0" column="2"><widget class="QPushButton" name="btnPoly"><property name="text"><string>Polygon</string></property></widget></item>
+          <item row="1" column="0" colspan="3"><widget class="QPushButton" name="btnClear"><property name="text"><string>Clear ROI</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QGroupBox" name="groupSpecs">
+         <property name="title"><string>Specs / Tolerances</string></property>
+         <layout class="QFormLayout" name="formSpecs">
+
+          <item row="0" column="0"><widget class="QLabel"><property name="text"><string>Line gap (mm)</string></property></widget></item>
+          <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinSpecLineGap"><property name="decimals"><number>3</number></property><property name="maximum"><double>1000.0</double></property><property name="value"><double>5.0</double></property></widget></item>
+          <item row="0" column="2"><widget class="QLabel"><property name="text"><string>±</string></property></widget></item>
+          <item row="0" column="3"><widget class="QDoubleSpinBox" name="spinTolLineGap"><property name="decimals"><number>3</number></property><property name="maximum"><double>1000.0</double></property><property name="value"><double>0.2</double></property></widget></item>
+
+          <item row="1" column="0"><widget class="QLabel"><property name="text"><string>Diameter A (mm)</string></property></widget></item>
+          <item row="1" column="1"><widget class="QDoubleSpinBox" name="spinSpecDiameter"><property name="decimals"><number>3</number></property><property name="maximum"><double>1000.0</double></property><property name="value"><double>20.0</double></property></widget></item>
+          <item row="1" column="2"><widget class="QLabel"><property name="text"><string>±</string></property></widget></item>
+          <item row="1" column="3"><widget class="QDoubleSpinBox" name="spinTolDiameter"><property name="decimals"><number>3</number></property><property name="maximum"><double>1000.0</double></property><property name="value"><double>0.1</double></property></widget></item>
+
+          <item row="2" column="0"><widget class="QLabel"><property name="text"><string>Roundness A (≤ mm)</string></property></widget></item>
+          <item row="2" column="1"><widget class="QDoubleSpinBox" name="spinTolRoundness"><property name="decimals"><number>3</number></property><property name="maximum"><double>1000.0</double></property><property name="value"><double>0.05</double></property></widget></item>
+
+          <item row="3" column="0"><widget class="QLabel"><property name="text"><string>Parallelism (≤ deg)</string></property></widget></item>
+          <item row="3" column="1"><widget class="QDoubleSpinBox" name="spinTolParallelDeg"><property name="decimals"><number>3</number></property><property name="maximum"><double>90.0</double></property><property name="value"><double>0.1</double></property></widget></item>
+
+          <item row="4" column="0"><widget class="QLabel"><property name="text"><string>Concentricity A-B (≤ mm)</string></property></widget></item>
+          <item row="4" column="1"><widget class="QDoubleSpinBox" name="spinTolConcentric"><property name="decimals"><number>3</number></property><property name="maximum"><double>1000.0</double></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <item><spacer name="sp1"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+      </layout>
+     </widget>
+    </item>
+
+    <item>
+     <widget class="QWidget" name="viewer">
+      <layout class="QVBoxLayout" name="vview">
+
+       <item>
+        <layout class="QHBoxLayout" name="layoutInput">
+         <!-- RoiView inserted here at runtime -->
+        </layout>
+       </item>
+
+       <item>
+        <widget class="QLabel" name="labelOutput">
+         <property name="text"><string>Output</string></property>
+         <property name="minimumSize"><size><width>640</width><height>360</height></size></property>
+         <property name="alignment"><set>Qt::AlignCenter</set></property>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QTableWidget" name="tableResults">
+         <property name="minimumSize"><size><width>900</width><height>220</height></size></property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <addaction name="menuFile"/>
+   <addaction name="menuRun"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text"><string>Open...</string></property>
+  </action>
+  <action name="actionRun">
+   <property name="text"><string>Run</string></property>
+  </action>
+  <widget class="QMenu" name="menuFile">
+   <property name="title"><string>File</string></property>
+   <addaction name="actionOpen"/>
+  </widget>
+  <widget class="QMenu" name="menuRun">
+   <property name="title"><string>Run</string></property>
+   <addaction name="actionRun"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

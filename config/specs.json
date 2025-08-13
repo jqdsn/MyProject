@@ -1,0 +1,22 @@
+{
+  "default": {
+    "mm_per_px": 0.05,
+    "line_gap": {
+      "target": 5.0,
+      "tol": 0.2
+    },
+    "parallelism": {
+      "max_deg": 0.1
+    },
+    "diameter": {
+      "target": 20.0,
+      "tol": 0.1
+    },
+    "roundness": {
+      "max_mm": 0.05
+    },
+    "concentricity": {
+      "max_mm": 0.1
+    }
+  }
+}
