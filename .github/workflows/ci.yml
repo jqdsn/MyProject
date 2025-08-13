@@ -32,6 +32,7 @@ jobs:
         echo "OpenCV_DIR=C:/tools/opencv/build/x64/vc15/lib" >> $env:GITHUB_ENV
     
     - name: Add DLL paths to GITHUB_PATH
+        shell: pwsh
         run: |
           echo "C:/tools/opencv/build/x64/vc15/bin" >> $env:GITHUB_PATH
           echo "${{ github.workspace }}/build/Debug" >> $env:GITHUB_PATH
