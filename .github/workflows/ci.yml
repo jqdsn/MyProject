@@ -25,9 +25,11 @@ jobs:
 
     # 2. 安装 OpenCV 4.5.4
     - name: Install OpenCV
-      run: |
-        choco install opencv --version=4.5.4 --yes
-        echo "OpenCV_DIR=C:/tools/opencv/build" >> $env:GITHUB_ENV
+      uses: Dovyski/setup-opencv-action@v1
+      with:
+        opencv-version: '4.5.4'
+        cache-enabled: true
+    
 
     # 3. 安装 GTest
     - name: Install GTest
