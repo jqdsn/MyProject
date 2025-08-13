@@ -34,9 +34,9 @@ jobs:
     - name: Add DLL paths to GITHUB_PATH
         shell: pwsh
         run: |
-          echo "C:/tools/opencv/build/x64/vc15/bin" >> $env:GITHUB_PATH
-          echo "${{ github.workspace }}/build/Debug" >> $env:GITHUB_PATH
-          echo "${{ github.workspace }}/build/Release" >> $env:GITHUB_PATH
+          echo "C:/tools/opencv/build/x64/vc15/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          echo "${{ github.workspace }}/build/Debug" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          echo "${{ github.workspace }}/build/Release" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
     
 
 
