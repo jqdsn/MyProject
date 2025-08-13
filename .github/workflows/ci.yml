@@ -25,11 +25,12 @@ jobs:
 
     # 2. 安装 OpenCV 4.5.4
     - name: Install OpenCV
-      uses: Dovyski/setup-opencv-action@v1
-      with:
-        opencv-version: '4.5.4'
-        cache-enabled: true
-    
+      shell: pwsh
+      run: |
+        choco install opencv --version=4.5.4 --yes
+        # 指向包含 OpenCVConfig.cmake 的实际路径
+        echo "OpenCV_DIR=C:/tools/opencv/build/x64/vc15/lib" >> $env:GITHUB_ENV
+
 
     # 3. 安装 GTest
     - name: Install GTest
@@ -42,7 +43,8 @@ jobs:
 
     # 4. 配置并构建项目
     - name: Configure CMake
-      run: cmake -B build -DCMAKE_PREFIX_PATH="%Qt6_DIR%;%OpenCV_DIR%;%GTest_DIR%"
+      shell: pwsh
+      run: cmake -B build -DCMAKE_PREFIX_PATH="$env:Qt6_DIR;$env:OpenCV_DIR;$env:GTest_DIR"
 
     - name: Build
       run: cmake --build build --config Release
