@@ -1,0 +1,51 @@
+name: Windows CI - Qt + OpenCV + GTest
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 1. 安装 Qt 6.7.x
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: 6.7.2
+        host: windows
+        arch: win64_msvc2019_64
+        modules: qtbase qtdeclarative
+        cache: true
+
+    # 2. 安装 OpenCV 4.5.4
+    - name: Install OpenCV
+      run: |
+        choco install opencv --version=4.5.4 --yes
+        echo "OpenCV_DIR=C:/tools/opencv/build" >> $env:GITHUB_ENV
+
+    # 3. 安装 GTest
+    - name: Install GTest
+      run: |
+        git clone https://github.com/google/googletest.git
+        cd googletest
+        cmake -B build
+        cmake --build build --config Release
+        echo "GTest_DIR=${{ github.workspace }}/googletest/build" >> $env:GITHUB_ENV
+
+    # 4. 配置并构建项目
+    - name: Configure CMake
+      run: cmake -B build -DCMAKE_PREFIX_PATH="%Qt6_DIR%;%OpenCV_DIR%;%GTest_DIR%"
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    # 5. 运行测试
+    - name: Run tests
+      run: ctest --test-dir build --output-on-failure --build-config Release
