@@ -18,10 +18,10 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        version: 6.7.2
+        version: 6.7.4
         host: windows
         arch: win64_msvc2019_64
-        modules: qtbase qtdeclarative
+        modules: qtbase qtnetwork qtconcurrent qtwidgets
         cache: true
 
     # 2. 安装 OpenCV 4.5.4
