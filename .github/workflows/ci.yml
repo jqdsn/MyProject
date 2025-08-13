@@ -44,7 +44,9 @@ jobs:
     # 4. 配置并构建项目
     - name: Configure CMake
       shell: pwsh
-      run: cmake -B build -DCMAKE_PREFIX_PATH="$env:Qt6_DIR;$env:OpenCV_DIR;$env:GTest_DIR"
+      run: cmake -B build -DCMAKE_PREFIX_PATH="$env:Qt6_DIR;$env:OpenCV_DIR;$env:GTest_DIR" -DGTEST_INCLUDE_DIR="C:/path/to/gtest/include" `
+        -DGTEST_LIBRARY="C:/path/to/gtest/lib/gtest.lib" `
+        -DGTEST_MAIN_LIBRARY="C:/path/to/gtest/lib/gtest_main.lib"
 
     - name: Build
       run: cmake --build build --config Release
